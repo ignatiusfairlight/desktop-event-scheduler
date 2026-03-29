@@ -1,4 +1,5 @@
 import type { ColumnDef } from "@tanstack/table-core";
+import { statusMap, formatDate, formatTime } from "$lib/tableUtils";
 
 export type Event = {
     title: string;
@@ -8,12 +9,6 @@ export type Event = {
     person_in_charge: string;
     contact_num: string;
     is_approved: number;
-}
-
-const statusMap: Record<number, string> = {
-    0: "Pending",
-    1: "Approved",
-    2: "Rejected"
 }
 
 export const columns: ColumnDef<Event>[] = [
@@ -66,21 +61,3 @@ export const columns: ColumnDef<Event>[] = [
         id: "actions"
     }
 ]
-
-function formatDate(datetime: string): string {
-    const date = new Date(datetime);
-    return date.toLocaleDateString('en-GB', {
-        day: '2-digit',
-        month: 'long',
-        year: 'numeric'
-    })
-}
-
-function formatTime(datetime: string): string {
-    const date = new Date(datetime);
-    return date.toLocaleTimeString('en-US', {
-        hour: 'numeric',
-        minute: '2-digit',
-        hour12: true
-    })
-}

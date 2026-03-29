@@ -1,4 +1,5 @@
 import type { ColumnDef } from "@tanstack/table-core";
+import { formatDate, formatTime } from "$lib/tableUtils";
 
 export type Event = {
     title: string;
@@ -55,21 +56,3 @@ export const columns: ColumnDef<Event>[] = [
         id: "actions"
     }
 ]
-
-function formatDate(datetime: string): string {
-    const date = new Date(datetime);
-    return date.toLocaleDateString('en-GB', {
-        day: '2-digit',
-        month: 'long',
-        year: 'numeric'
-    })
-}
-
-function formatTime(datetime: string): string {
-    const date = new Date(datetime);
-    return date.toLocaleTimeString('en-US', {
-        hour: 'numeric',
-        minute: '2-digit',
-        hour12: true
-    })
-}
