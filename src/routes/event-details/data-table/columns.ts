@@ -16,12 +16,28 @@ export const columns: ColumnDef<Event>[] = [
         header: "Title",
     },
     {
-        accessorKey: "start",
-        header: "Start",
+        id: "startDate",
+        header: "Start Date",
+        accessorFn: (row) => row.start,
+        cell: ({ row }) => formatDate(row.original.start)
+    },
+        {
+        id: "startTime",
+        header: "Start Time",
+        accessorFn: (row) => row.start,
+        cell: ({ row }) => formatTime(row.original.start)
     },
     {
-        accessorKey: "end",
-        header: "End",
+        id: "endDate",
+        header: "End Date",
+        accessorFn: (row) => row.end,
+        cell: ({ row }) => formatDate(row.original.end)
+    },
+        {
+        id: "endTime",
+        header: "End Time",
+        accessorFn: (row) => row.end,
+        cell: ({ row }) => formatTime(row.original.end)
     },
     {
         accessorKey: "location",
@@ -40,3 +56,21 @@ export const columns: ColumnDef<Event>[] = [
         header: "Approval Status",
     }
 ]
+
+function formatDate(datetime: string): string {
+    const date = new Date(datetime);
+    return date.toLocaleDateString('en-GB', {
+        day: '2-digit',
+        month: 'long',
+        year: 'numeric'
+    })
+}
+
+function formatTime(datetime: string): string {
+    const date = new Date(datetime);
+    return date.toLocaleTimeString('en-US', {
+        hour: 'numeric',
+        minute: '2-digit',
+        hour12: true
+    })
+}
