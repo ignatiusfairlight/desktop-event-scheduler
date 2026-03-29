@@ -18,9 +18,11 @@
   });
 
   let archivedData = $derived(
-    data.filter(
-      (event) => event.is_approved === 1 && new Date(event.end) < new Date(),
-    ),
+    data
+      .filter(
+        (event) => event.is_approved === 1 && new Date(event.end) < new Date(),
+      )
+      .sort((a, b) => new Date(b.end).getTime() - new Date(a.end).getTime()),
   );
 </script>
 

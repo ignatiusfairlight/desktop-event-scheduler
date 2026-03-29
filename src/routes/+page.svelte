@@ -20,15 +20,25 @@
   });
 
   let upcomingData = $derived(
-    data.filter(
-      (event) => event.is_approved === 1 && new Date(event.start) > new Date(),
-    ),
+    data
+      .filter(
+        (event) =>
+          event.is_approved === 1 && new Date(event.start) > new Date(),
+      )
+      .sort(
+        (a, b) => new Date(a.start).getTime() - new Date(b.start).getTime(),
+      ),
   );
 
   let approvalData = $derived(
-    data.filter(
-      (event) => event.is_approved === 0 && new Date(event.start) > new Date(),
-    ),
+    data
+      .filter(
+        (event) =>
+          event.is_approved === 0 && new Date(event.start) > new Date(),
+      )
+      .sort(
+        (a, b) => new Date(a.start).getTime() - new Date(b.start).getTime(),
+      ),
   );
 </script>
 

@@ -1,6 +1,7 @@
 <script lang="ts">
     import DataTable from "$lib/components/data-table.svelte";
-    import { columns, type Event } from "./columns";
+    import { columns } from "./columns";
+    import { type Event } from "$lib/tableUtils";
     import { onMount } from "svelte";
     import { invoke } from "@tauri-apps/api/core";
 
@@ -15,10 +16,18 @@
                 console.error(e);
             });
     });
+
+    let ongoingData = $derived(
+        data
+            .filter((event) => new Date(event.end) > new Date())
+            .sort(
+                (a, b) => new Date(a.end).getTime() - new Date(b.end).getTime(),
+            ),
+    );
 </script>
 
 <h2 class="mt-5 mb-4 ml-10 text-4xl font-semibold">Event Details</h2>
 
 <div class="flex flex-col gap-10 p-4 xl:flex-row xl:p-10">
-    <DataTable {data} {columns}/>
+    <DataTable data={ongoingData} {columns} />
 </div>
