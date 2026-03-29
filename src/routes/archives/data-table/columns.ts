@@ -21,7 +21,7 @@ export const columns: ColumnDef<Event>[] = [
         accessorFn: (row) => row.start,
         cell: ({ row }) => formatDate(row.original.start)
     },
-        {
+    {
         id: "startTime",
         header: "Start Time",
         accessorFn: (row) => row.start,
@@ -33,7 +33,7 @@ export const columns: ColumnDef<Event>[] = [
         accessorFn: (row) => row.end,
         cell: ({ row }) => formatDate(row.original.end)
     },
-        {
+    {
         id: "endTime",
         header: "End Time",
         accessorFn: (row) => row.end,
@@ -54,6 +54,9 @@ export const columns: ColumnDef<Event>[] = [
     {
         accessorKey: "is_approved",
         header: "Approval Status",
+    },
+    {
+        id: "actions"
     }
 ]
 

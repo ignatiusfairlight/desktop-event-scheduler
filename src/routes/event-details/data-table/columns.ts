@@ -54,6 +54,9 @@ export const columns: ColumnDef<Event>[] = [
     {
         accessorKey: "is_approved",
         header: "Approval Status",
+    },
+    {
+        id: "actions"
     }
 ]
 
