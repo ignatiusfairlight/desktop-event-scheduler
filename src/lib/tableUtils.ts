@@ -1,3 +1,13 @@
+export type Event = {
+    title: string;
+    start: string;
+    end: string;
+    location: string;
+    person_in_charge: string;
+    contact_num: string;
+    is_approved: number;
+}
+
 export const statusMap: Record<number, string> = {
     0: "Pending",
     1: "Approved",

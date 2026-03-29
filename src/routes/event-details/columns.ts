@@ -1,15 +1,5 @@
 import type { ColumnDef } from "@tanstack/table-core";
-import { statusMap, formatDate, formatTime } from "$lib/tableUtils";
-
-export type Event = {
-    title: string;
-    start: string;
-    end: string;
-    location: string;
-    person_in_charge: string;
-    contact_num: string;
-    is_approved: number;
-}
+import { statusMap, formatDate, formatTime, type Event } from "$lib/tableUtils";
 
 export const columns: ColumnDef<Event>[] = [
     {
