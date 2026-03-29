@@ -1,6 +1,6 @@
 <script lang="ts">
-  import DataTable from "./data-table/data-table.svelte";
-  import { columns, type Event } from "./data-table/columns";
+  import DataTable from "$lib/components/data-table.svelte";
+  import { columns, type Event } from "./columns";
   import { onMount } from "svelte";
   import { invoke } from "@tauri-apps/api/core";
 
