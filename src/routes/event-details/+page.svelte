@@ -1,8 +1,16 @@
 <script lang="ts">
     import DataTable from "./data-table/data-table.svelte";
-    import { columns } from "./data-table/columns";
+    import { columns, type Event } from "./data-table/columns";
+    import { onMount } from "svelte";
+    import { invoke } from "@tauri-apps/api/core";
 
-    let data = $state([]);
+    let data = $state<Event[]>([]);
+
+    onMount(async () => {
+            invoke<Event[]>('get_events')
+            .then(result => { data = result })
+            .catch(e => { console.error(e) })
+    })
 </script>
 
 <h2 class="mt-5 mb-4 ml-10 text-4xl font-semibold">Event Details</h2>
