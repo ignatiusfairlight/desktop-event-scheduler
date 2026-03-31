@@ -1,12 +1,12 @@
 <script lang="ts">
   import Calendar from "$lib/components/calendar.svelte";
+  import DataTable from "$lib/components/data-table.svelte";
   import { columns as approvalColumns } from "./approval-columns";
   import { columns as upcomingColumns } from "./upcoming-columns";
   import { type Event } from "$lib/tableUtils";
   import { onMount } from "svelte";
   import { invoke } from "@tauri-apps/api/core";
-  import DataTable from "$lib/components/data-table.svelte";
-
+  
   let data = $state<Event[]>([]);
 
   onMount(async () => {
@@ -27,7 +27,8 @@
       )
       .sort(
         (a, b) => new Date(a.start).getTime() - new Date(b.start).getTime(),
-      ),
+      )
+      .slice(0, 5)
   );
 
   let approvalData = $derived(
@@ -38,7 +39,8 @@
       )
       .sort(
         (a, b) => new Date(a.start).getTime() - new Date(b.start).getTime(),
-      ),
+      )
+      .slice(0, 5),
   );
 </script>
 
