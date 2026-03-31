@@ -51,9 +51,9 @@
     <Calendar {data} />
   </div>
   <div>
-    <DataTable data={upcomingData} columns={upcomingColumns} />
+    <DataTable data={upcomingData} columns={upcomingColumns} showPagination={false} />
   </div>
   <div>
-    <DataTable data={approvalData} columns={approvalColumns} />
+    <DataTable data={approvalData} columns={approvalColumns} showPagination={false} />
   </div>
 </div>
