@@ -6,7 +6,7 @@
   import { type Event } from "$lib/tableUtils";
   import { onMount } from "svelte";
   import { invoke } from "@tauri-apps/api/core";
-  
+
   let data = $state<Event[]>([]);
 
   onMount(async () => {
@@ -19,16 +19,16 @@
       });
   });
 
+  let approvedData = $derived(data.filter((event) => event.is_approved === 1));
+
   let upcomingData = $derived(
     data
       .filter(
         (event) =>
           event.is_approved === 1 && new Date(event.start) > new Date(),
       )
-      .sort(
-        (a, b) => new Date(a.start).getTime() - new Date(b.start).getTime(),
-      )
-      .slice(0, 5)
+      .sort((a, b) => new Date(a.start).getTime() - new Date(b.start).getTime())
+      .slice(0, 5),
   );
 
   let approvalData = $derived(
@@ -37,9 +37,7 @@
         (event) =>
           event.is_approved === 0 && new Date(event.start) > new Date(),
       )
-      .sort(
-        (a, b) => new Date(a.start).getTime() - new Date(b.start).getTime(),
-      )
+      .sort((a, b) => new Date(a.start).getTime() - new Date(b.start).getTime())
       .slice(0, 5),
   );
 </script>
@@ -48,12 +46,22 @@
 
 <div>
   <div>
-    <Calendar {data} />
+    {#if data.length > 0}
+      <Calendar data={{ events: approvedData }} />
+    {/if}
   </div>
   <div>
-    <DataTable data={upcomingData} columns={upcomingColumns} showPagination={false} />
+    <DataTable
+      data={upcomingData}
+      columns={upcomingColumns}
+      showPagination={false}
+    />
   </div>
   <div>
-    <DataTable data={approvalData} columns={approvalColumns} showPagination={false} />
+    <DataTable
+      data={approvalData}
+      columns={approvalColumns}
+      showPagination={false}
+    />
   </div>
 </div>

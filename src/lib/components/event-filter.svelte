@@ -1,6 +1,8 @@
 <script lang="ts">
     import { Input } from "$lib/components/ui/input/index.js";
     import * as Select from "$lib/components/ui/select/index.js";
+    import { Checkbox } from "$lib/components/ui/checkbox/index.js";
+    import { Label } from "$lib/components/ui/label/index.js";
 
     let {
         filterTitle = $bindable(),
@@ -10,7 +12,7 @@
     } = $props();
 
     const months = [
-        { value: "", label: "Select a month"},
+        { value: "", label: "Select a month" },
         { value: "0", label: "January" },
         { value: "1", label: "February" },
         { value: "2", label: "March" },
@@ -43,7 +45,6 @@
         class="max-w-xs"
     />
 </div>
-
 <div>
     <Select.Root type="single" bind:value={filterStartMonth}>
         <Select.Trigger class="w-[180px]">{startSelectTrigger}</Select.Trigger>
@@ -62,5 +63,32 @@
         </Select.Content>
     </Select.Root>
 </div>
-
-<div></div>
+<div>
+    <div>
+        <Checkbox
+            onclick={() =>
+                (filterStatus = filterStatus.includes(0)
+                    ? filterStatus.filter((item: number) => item !== 0)
+                    : [...filterStatus, 0])}
+        />
+        <Label>Pending</Label>
+    </div>
+    <div>
+        <Checkbox
+            onclick={() =>
+                (filterStatus = filterStatus.includes(1)
+                    ? filterStatus.filter((item: number) => item !== 1)
+                    : [...filterStatus, 1])}
+        />
+        <Label>Approved</Label>
+    </div>
+    <div>
+        <Checkbox
+            onclick={() =>
+                (filterStatus = filterStatus.includes(2)
+                    ? filterStatus.filter((item: number) => item !== 2)
+                    : [...filterStatus, 2])}
+        />
+        <Label>Rejected</Label>
+    </div>
+</div>
