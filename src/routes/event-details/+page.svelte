@@ -5,6 +5,7 @@
     import { onMount } from "svelte";
     import { invoke } from "@tauri-apps/api/core";
     import EventFilter from "$lib/components/event-filter.svelte";
+    import CreateEvent from "./event-form/create-event.svelte";
 
     let data = $state<Event[]>([]);
 
@@ -61,6 +62,9 @@
         bind:filterEndMonth={filters.endMonth}
         bind:filterStatus={filters.status}
     />
+</div>
+<div>
+    <CreateEvent />
 </div>
 <div class="flex flex-col gap-10 p-4 xl:flex-row xl:p-10">
     <DataTable data={filteredResults} {columns} showPagination={true} />
