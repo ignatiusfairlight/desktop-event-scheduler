@@ -5,6 +5,7 @@
     import { formSchema, type FormSchema } from "./schema";
     import { defaults, superForm } from "sveltekit-superforms";
     import { zod4 } from "sveltekit-superforms/adapters";
+    import { Button, buttonVariants } from "$lib/components/ui/button/index.js";
 
     const form = superForm(defaults(zod4(formSchema)), {
         validators: zod4(formSchema),
@@ -25,6 +26,7 @@
                         <Input {...props} bind:value={$formData.title} />
                     {/snippet}
                 </Form.Control>
+                <Form.FieldErrors />
             </Form.Field>
             <Form.Field {form} name="location">
                 <Form.Control>
@@ -33,6 +35,7 @@
                         <Input {...props} bind:value={$formData.location} />
                     {/snippet}
                 </Form.Control>
+                <Form.FieldErrors />
             </Form.Field>
             <Form.Field {form} name="personInCharge">
                 <Form.Control>
@@ -44,6 +47,7 @@
                         />
                     {/snippet}
                 </Form.Control>
+                <Form.FieldErrors />
             </Form.Field>
             <Form.Field {form} name="contactNum">
                 <Form.Control>
@@ -52,7 +56,19 @@
                         <Input {...props} bind:value={$formData.contactNum} />
                     {/snippet}
                 </Form.Control>
+                <Form.FieldErrors />
             </Form.Field>
         </form>
     </Dialog.Content>
+    <Dialog.Footer>
+        <Dialog.Close
+            type="button"
+            class={buttonVariants({ variant: "outline" })}
+        >
+            Cancel
+        </Dialog.Close>
+        <Button type="button" class={buttonVariants({ variant: "secondary" })}
+            >Save changes</Button
+        >
+    </Dialog.Footer>
 </Dialog.Root>
