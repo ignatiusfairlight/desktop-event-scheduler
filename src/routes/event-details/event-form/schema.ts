@@ -1,0 +1,16 @@
+import { z } from "zod";
+
+export const formSchema = z.object({
+    title: z.string().min(2).max(50),
+    startDate: z.string().min(1),
+    startTime: z.string().min(1),
+    endDate: z.string().min(1),
+    endTime: z.string().min(1),
+    location: z.string().min(5).max(25),
+    personInCharge: z.string().min(5).max(25),
+    contactNum: z.string().min(10).regex(/^\+?[0-9]+$/, "Invalid phone number"),
+    isApproved: z.union([z.literal(0), z.literal(1), z.literal(2)]).default(0)
+
+});
+
+export type FormSchema = typeof formSchema;
