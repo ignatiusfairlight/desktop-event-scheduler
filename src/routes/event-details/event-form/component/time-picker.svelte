@@ -7,6 +7,10 @@
     let { time = $bindable("") }: { time: string } = $props();
 </script>
 
+
+<!--TODO-->
+<!-- Create a logic to prevent the user from picking time occurs before the start -->
+
 <div>
     <div class="flex flex-col gap-3">
         <Label for="{id}-time" class="px-1">Time</Label>
