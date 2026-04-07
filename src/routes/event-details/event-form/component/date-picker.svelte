@@ -4,15 +4,23 @@
     import { Button } from "$lib/components/ui/button/index.js";
     import { Label } from "$lib/components/ui/label/index.js";
     import ChevronDownIcon from "@lucide/svelte/icons/chevron-down";
-    import { getLocalTimeZone } from "@internationalized/date";
+    import {
+        getLocalTimeZone,
+        parseDate,
+        today,
+    } from "@internationalized/date";
     import type { CalendarDate } from "@internationalized/date";
+    import { calendarDateToString } from "$lib/tableUtils";
 
     const id = $props.id();
 
     let open = $state(false);
     let value = $state<CalendarDate | undefined>();
 
-    let { date = $bindable() } = $props();
+    let {
+        date = $bindable(""),
+        minDate = "",
+    }: { date: string; minDate?: string } = $props();
 </script>
 
 <div class="flex gap-4">
@@ -41,7 +49,11 @@
                     bind:value
                     onValueChange={() => {
                         open = false;
+                        date = value ? calendarDateToString(value) : "";
                     }}
+                    minValue={minDate
+                        ? parseDate(minDate.slice(0, 10))
+                        : today(getLocalTimeZone())}
                     captionLayout="dropdown"
                 />
             </Popover.Content>

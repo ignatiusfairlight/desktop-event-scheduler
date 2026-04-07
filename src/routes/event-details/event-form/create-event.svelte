@@ -6,6 +6,7 @@
     import { defaults, superForm } from "sveltekit-superforms";
     import { zod4 } from "sveltekit-superforms/adapters";
     import { Button, buttonVariants } from "$lib/components/ui/button/index.js";
+    import DatePicker from "./component/date-picker.svelte";
 
     const form = superForm(defaults(zod4(formSchema)), {
         validators: zod4(formSchema),
@@ -16,9 +17,9 @@
 </script>
 
 <Dialog.Root>
-    <form use:enhance>
-        <Dialog.Trigger>Create New Event</Dialog.Trigger>
-        <Dialog.Content>
+    <Dialog.Trigger>Create New Event</Dialog.Trigger>
+    <Dialog.Content>
+        <form use:enhance>
             <Form.Field {form} name="title">
                 <Form.Control>
                     {#snippet children({ props })}
@@ -29,24 +30,39 @@
                 <Form.FieldErrors />
             </Form.Field>
             <Form.Field {form} name="startDate">
-                {#snippet children()}
-                    <Form.Label>Start Date</Form.Label>
-                {/snippet}
+                <Form.Control>
+                    {#snippet children({ props })}
+                        <Form.Label>Start Date</Form.Label>
+                        <DatePicker
+                            {...props}
+                            bind:date={$formData.startDate}
+                        />
+                    {/snippet}
+                </Form.Control>
+                <Form.FieldErrors />
             </Form.Field>
             <Form.Field {form} name="startTime">
-                {#snippet children()}
-                    <Form.Label>Start Time</Form.Label>
-                {/snippet}
+                <Form.Control>
+                    {#snippet children()}
+                        <Form.Label>Start Time</Form.Label>
+                    {/snippet}
+                </Form.Control>
             </Form.Field>
             <Form.Field {form} name="endDate">
-                {#snippet children()}
-                    <Form.Label>End Date</Form.Label>
-                {/snippet}
+                <Form.Control>
+                    {#snippet children({ props })}
+                        <Form.Label>End Date</Form.Label>
+                        <DatePicker {...props} bind:date={$formData.endDate} minDate={$formData.startDate} />
+                    {/snippet}
+                </Form.Control>
+                <Form.FieldErrors />
             </Form.Field>
             <Form.Field {form} name="endTime">
-                {#snippet children()}
-                    <Form.Label>End Time</Form.Label>
-                {/snippet}
+                <Form.Control>
+                    {#snippet children()}
+                        <Form.Label>End Time</Form.Label>
+                    {/snippet}
+                </Form.Control>
             </Form.Field>
             <Form.Field {form} name="location">
                 <Form.Control>
@@ -78,19 +94,19 @@
                 </Form.Control>
                 <Form.FieldErrors />
             </Form.Field>
-        </Dialog.Content>
-        <Dialog.Footer>
-            <Dialog.Close
-                type="button"
-                class={buttonVariants({ variant: "outline" })}
-            >
-                Cancel
-            </Dialog.Close>
-            <Button
-                type="button"
-                class={buttonVariants({ variant: "secondary" })}
-                >Save changes</Button
-            >
-        </Dialog.Footer>
-    </form>
+            <Dialog.Footer>
+                <Dialog.Close
+                    type="button"
+                    class={buttonVariants({ variant: "outline" })}
+                >
+                    Cancel
+                </Dialog.Close>
+                <Button
+                    type="button"
+                    class={buttonVariants({ variant: "secondary" })}
+                    >Save changes</Button
+                >
+            </Dialog.Footer>
+        </form>
+    </Dialog.Content>
 </Dialog.Root>

@@ -1,3 +1,5 @@
+import type { CalendarDate } from "@internationalized/date";
+
 export type Event = {
     title: string;
     start: string;
@@ -30,4 +32,8 @@ export function formatTime(datetime: string): string {
         minute: '2-digit',
         hour12: true
     })
+}
+
+export function calendarDateToString(date: CalendarDate): string {
+    return `${date.year}-${String(date.month).padStart(2, '0')}-${String(date.day).padStart(2, '0')}`;
 }
