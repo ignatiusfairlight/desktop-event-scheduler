@@ -4,7 +4,7 @@
 
     const id = $props.id();
 
-    let { time = $bindable() } = $props();
+    let { time = $bindable("") }: { time: string } = $props();
 </script>
 
 <div>
@@ -14,7 +14,7 @@
             type="time"
             id="{id}-time"
             step="1"
-            value="10:30:00"
+            bind:value={time}
             class="
                 bg-background appearance-none 
                 [&::-webkit-calendar-picker-indicator]:hidden 

@@ -7,6 +7,7 @@
     import { zod4 } from "sveltekit-superforms/adapters";
     import { Button, buttonVariants } from "$lib/components/ui/button/index.js";
     import DatePicker from "./component/date-picker.svelte";
+    import TimePicker from "./component/time-picker.svelte";
 
     const form = superForm(defaults(zod4(formSchema)), {
         validators: zod4(formSchema),
@@ -43,8 +44,9 @@
             </Form.Field>
             <Form.Field {form} name="startTime">
                 <Form.Control>
-                    {#snippet children()}
+                    {#snippet children({ props })}
                         <Form.Label>Start Time</Form.Label>
+                        <TimePicker {...props} bind:time={$formData.startTime} />
                     {/snippet}
                 </Form.Control>
             </Form.Field>
@@ -59,8 +61,9 @@
             </Form.Field>
             <Form.Field {form} name="endTime">
                 <Form.Control>
-                    {#snippet children()}
+                    {#snippet children({ props })}
                         <Form.Label>End Time</Form.Label>
+                        <TimePicker {...props} bind:time={$formData.endTime} />
                     {/snippet}
                 </Form.Control>
             </Form.Field>
