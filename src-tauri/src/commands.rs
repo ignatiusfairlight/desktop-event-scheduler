@@ -16,6 +16,17 @@ pub struct Event {
     updated_at: String,
 }
 
+#[derive(Deserialize)]
+pub struct CreateEvent {
+    title: String,
+    start: String,
+    end: String,
+    location: String,
+    person_in_charge: String,
+    contact_num: String,
+    is_approved: i64,
+}
+
 #[tauri::command]
 pub async fn get_events(pool: State<'_, SqlitePool>) -> Result<Vec<Event>, String> {
     sqlx::query_as::<_, Event>("SELECT * FROM events")
@@ -25,7 +36,7 @@ pub async fn get_events(pool: State<'_, SqlitePool>) -> Result<Vec<Event>, Strin
 }
 
 #[tauri::command]
-pub async fn create_event(pool: State<'_, SqlitePool>, event: Event) -> Result<(), String> {
+pub async fn create_event(pool: State<'_, SqlitePool>, event: CreateEvent) -> Result<(), String> {
     sqlx::query(
         "INSERT INTO events (
             title, 
