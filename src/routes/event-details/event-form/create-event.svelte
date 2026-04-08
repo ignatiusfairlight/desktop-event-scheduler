@@ -8,6 +8,9 @@
     import { Button, buttonVariants } from "$lib/components/ui/button/index.js";
     import DatePicker from "./component/date-picker.svelte";
     import TimePicker from "./component/time-picker.svelte";
+    import ApprovalSelect from "./component/approval-select.svelte";
+
+    let approvalStatus = $state("");
 
     const form = superForm(defaults(zod4(formSchema)), {
         validators: zod4(formSchema),
@@ -96,6 +99,14 @@
                     {/snippet}
                 </Form.Control>
                 <Form.FieldErrors />
+            </Form.Field>
+            <Form.Field {form} name="isApproved">
+                <Form.Control>
+                    {#snippet children({ props })}
+                        <Form.Label>Approval Status</Form.Label>
+                        <ApprovalSelect {...props} bind:approvalStatus={$formData.isApproved} />
+                    {/snippet}
+                </Form.Control>
             </Form.Field>
             <Dialog.Footer>
                 <Dialog.Close
