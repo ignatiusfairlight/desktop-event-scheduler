@@ -16,6 +16,8 @@
     // TODOs
     // Add toast for success and failure
     // Maybe loading animation as well
+    // Form should close on submission
+    // Page should show new event after submission
     const form = superForm(defaults(zod4(formSchema)), {
         validators: zod4(formSchema),
         SPA: true,
