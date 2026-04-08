@@ -3,18 +3,54 @@
     import * as Form from "$lib/components/ui/form/index.js";
     import { Input } from "$lib/components/ui/input/index.js";
     import { formSchema } from "./schema";
-    import { defaults, superForm } from "sveltekit-superforms";
+    import { defaults, setError, superForm } from "sveltekit-superforms";
     import { zod4 } from "sveltekit-superforms/adapters";
     import { Button, buttonVariants } from "$lib/components/ui/button/index.js";
     import DatePicker from "./component/date-picker.svelte";
     import TimePicker from "./component/time-picker.svelte";
     import ApprovalSelect from "./component/approval-select.svelte";
+    import { invoke } from "@tauri-apps/api/core";
 
     let approvalStatus = $state("0");
 
+    // TODOs
+    // Add toast for success and failure
+    // Maybe loading animation as well
     const form = superForm(defaults(zod4(formSchema)), {
         validators: zod4(formSchema),
         SPA: true,
+        async onUpdate({ form: formResult }) {
+            if (
+                new Date(
+                    `${formResult.data.startDate} ${formResult.data.startTime}`,
+                ) >
+                new Date(
+                    `${formResult.data.endDate} ${formResult.data.endTime}`,
+                )
+            ) {
+                setError(
+                    formResult,
+                    "endTime",
+                    "End time must be after start time",
+                );
+            } else {
+                try {
+                    await invoke("create_event", {
+                        event: {
+                            title: formResult.data.title,
+                            start: `${formResult.data.startDate} ${formResult.data.startTime}`,
+                            end: `${formResult.data.endDate} ${formResult.data.endTime}`,
+                            location: formResult.data.location,
+                            person_in_charge: formResult.data.personInCharge,
+                            contact_num: formResult.data.contactNum,
+                            is_approved: parseInt(approvalStatus),
+                        },
+                    });
+                } catch (error) {
+                    console.error(error)
+                }
+            }
+        },
     });
 
     const { form: formData, enhance } = form;
@@ -49,7 +85,10 @@
                 <Form.Control>
                     {#snippet children({ props })}
                         <Form.Label>Start Time</Form.Label>
-                        <TimePicker {...props} bind:time={$formData.startTime} />
+                        <TimePicker
+                            {...props}
+                            bind:time={$formData.startTime}
+                        />
                     {/snippet}
                 </Form.Control>
             </Form.Field>
@@ -57,7 +96,11 @@
                 <Form.Control>
                     {#snippet children({ props })}
                         <Form.Label>End Date</Form.Label>
-                        <DatePicker {...props} bind:date={$formData.endDate} minDate={$formData.startDate} />
+                        <DatePicker
+                            {...props}
+                            bind:date={$formData.endDate}
+                            minDate={$formData.startDate}
+                        />
                     {/snippet}
                 </Form.Control>
                 <Form.FieldErrors />
@@ -104,7 +147,7 @@
                 <Form.Control>
                     {#snippet children({ props })}
                         <Form.Label>Approval Status</Form.Label>
-                        <ApprovalSelect {...props} bind:approvalStatus={approvalStatus} />
+                        <ApprovalSelect {...props} bind:approvalStatus />
                     {/snippet}
                 </Form.Control>
             </Form.Field>
@@ -116,7 +159,7 @@
                     Cancel
                 </Dialog.Close>
                 <Button
-                    type="button"
+                    type="submit"
                     class={buttonVariants({ variant: "secondary" })}
                     >Save changes</Button
                 >

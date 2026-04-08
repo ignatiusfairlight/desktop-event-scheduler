@@ -8,7 +8,7 @@ export const formSchema = z.object({
     endTime: z.string().min(1),
     location: z.string().min(5).max(25),
     personInCharge: z.string().min(5).max(25),
-    contactNum: z.string().min(10).regex(/^\+?[0-9]+$/, "Invalid phone number"),
+    contactNum: z.string().min(10).regex(/^\+?\d+$/, "Invalid phone number"),
     isApproved: z.union([z.literal(0), z.literal(1), z.literal(2)]).default(0)
 
 });
