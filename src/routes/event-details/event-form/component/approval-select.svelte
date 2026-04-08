@@ -10,7 +10,7 @@
     let { approvalStatus = $bindable() } = $props();
 
     const triggerContent = $derived(
-        statuses.find((f) => f.value === approvalStatus)?.label ?? "Is it approved?",
+        statuses.find((f) => f.value === approvalStatus)?.label ?? statuses[0].label,
     );
 </script>
 

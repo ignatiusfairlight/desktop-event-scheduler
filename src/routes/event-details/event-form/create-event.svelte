@@ -10,7 +10,7 @@
     import TimePicker from "./component/time-picker.svelte";
     import ApprovalSelect from "./component/approval-select.svelte";
 
-    let approvalStatus = $state("");
+    let approvalStatus = $state("0");
 
     const form = superForm(defaults(zod4(formSchema)), {
         validators: zod4(formSchema),
@@ -104,7 +104,7 @@
                 <Form.Control>
                     {#snippet children({ props })}
                         <Form.Label>Approval Status</Form.Label>
-                        <ApprovalSelect {...props} bind:approvalStatus={$formData.isApproved} />
+                        <ApprovalSelect {...props} bind:approvalStatus={approvalStatus} />
                     {/snippet}
                 </Form.Control>
             </Form.Field>
