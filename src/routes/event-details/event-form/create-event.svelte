@@ -6,11 +6,12 @@
     import { defaults, setError, superForm } from "sveltekit-superforms";
     import { zod4 } from "sveltekit-superforms/adapters";
     import { Button, buttonVariants } from "$lib/components/ui/button/index.js";
+    import { invoke } from "@tauri-apps/api/core";
+    import { toast } from "svelte-sonner";
     import DatePicker from "./component/date-picker.svelte";
     import TimePicker from "./component/time-picker.svelte";
     import ApprovalSelect from "./component/approval-select.svelte";
-    import { invoke } from "@tauri-apps/api/core";
-
+    
     let approvalStatus = $state("0");
     let isOpen = $state(false);
 
@@ -51,8 +52,10 @@
                     });
                     onSuccess();
                     isOpen = false;
+                    toast("Event created!");
                 } catch (error) {
-                    console.error(error)
+                    console.error(error);
+                    toast("Failed to create event.")
                 }
             }
         },

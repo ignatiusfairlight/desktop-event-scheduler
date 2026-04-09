@@ -1,6 +1,6 @@
 <script lang="ts">
     import DataTable from "$lib/components/data-table.svelte";
-    import { createColumns} from "./columns";
+    import { createColumns } from "./columns";
     import { type Event } from "$lib/tableUtils";
     import { onMount } from "svelte";
     import { invoke } from "@tauri-apps/api/core";
@@ -73,5 +73,5 @@
     <CreateEvent onSuccess={fetchEvents} />
 </div>
 <div class="flex flex-col gap-10 p-4 xl:flex-row xl:p-10">
-    <DataTable data={filteredResults} columns={columns} showPagination={true} />
+    <DataTable data={filteredResults} {columns} showPagination={true} />
 </div>
