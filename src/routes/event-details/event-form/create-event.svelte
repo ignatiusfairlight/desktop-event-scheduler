@@ -11,21 +11,18 @@
     import DatePicker from "./component/date-picker.svelte";
     import TimePicker from "./component/time-picker.svelte";
     import ApprovalSelect from "./component/approval-select.svelte";
-    
+
     let approvalStatus = $state("0");
     let isOpen = $state(false);
 
     const { onSuccess } = $props<{ onSuccess: () => void }>();
 
-    // TODOs
-    // Add toast for success and failure
-    // Maybe loading animation as well
     const form = superForm(defaults(zod4(formSchema)), {
         validators: zod4(formSchema),
         SPA: true,
         async onUpdate({ form: formResult }) {
             if (!formResult.valid) return;
-            
+
             if (
                 new Date(
                     `${formResult.data.startDate} ${formResult.data.startTime}`,
@@ -54,10 +51,13 @@
                     });
                     onSuccess();
                     isOpen = false;
-                    toast("Event created!");
+                    toast.info("Event created!", {
+                        description: 
+                        `Title: ${formResult.data.title}, Start: ${formResult.data.startDate}, ${formResult.data.startTime}`
+                    });
                 } catch (error) {
                     console.error(error);
-                    toast("Failed to create event.")
+                    toast("Failed to create event.");
                 }
             }
         },

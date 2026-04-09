@@ -7,7 +7,7 @@
   let { children } = $props();
 </script>
 
-<Toaster />
+<Toaster position="top-center" richColors />
 
 <Sidebar.Provider>
   <AppSidebar />
