@@ -24,6 +24,8 @@
         validators: zod4(formSchema),
         SPA: true,
         async onUpdate({ form: formResult }) {
+            if (!formResult.valid) return;
+            
             if (
                 new Date(
                     `${formResult.data.startDate} ${formResult.data.startTime}`,
