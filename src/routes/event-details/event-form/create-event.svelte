@@ -12,11 +12,11 @@
     import { invoke } from "@tauri-apps/api/core";
 
     let approvalStatus = $state("0");
+    let isOpen = $state(false);
 
     // TODOs
     // Add toast for success and failure
     // Maybe loading animation as well
-    // Form should close on submission
     // Page should show new event after submission
     const form = superForm(defaults(zod4(formSchema)), {
         validators: zod4(formSchema),
@@ -48,6 +48,7 @@
                             is_approved: parseInt(approvalStatus),
                         },
                     });
+                    isOpen = false;
                 } catch (error) {
                     console.error(error)
                 }
@@ -58,7 +59,7 @@
     const { form: formData, enhance } = form;
 </script>
 
-<Dialog.Root>
+<Dialog.Root bind:open={isOpen}>
     <Dialog.Trigger>Create New Event</Dialog.Trigger>
     <Dialog.Content>
         <form use:enhance>
