@@ -14,10 +14,11 @@
     let approvalStatus = $state("0");
     let isOpen = $state(false);
 
+    const { onSuccess } = $props<{ onSuccess: () => void }>();
+
     // TODOs
     // Add toast for success and failure
     // Maybe loading animation as well
-    // Page should show new event after submission
     const form = superForm(defaults(zod4(formSchema)), {
         validators: zod4(formSchema),
         SPA: true,
@@ -48,6 +49,7 @@
                             is_approved: parseInt(approvalStatus),
                         },
                     });
+                    onSuccess();
                     isOpen = false;
                 } catch (error) {
                     console.error(error)

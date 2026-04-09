@@ -70,7 +70,7 @@
     />
 </div>
 <div>
-    <CreateEvent />
+    <CreateEvent onSuccess={fetchEvents} />
 </div>
 <div class="flex flex-col gap-10 p-4 xl:flex-row xl:p-10">
     <DataTable data={filteredResults} columns={columns} showPagination={true} />
