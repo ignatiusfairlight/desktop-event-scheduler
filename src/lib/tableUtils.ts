@@ -1,6 +1,7 @@
 import type { CalendarDate } from "@internationalized/date";
 
 export type Event = {
+    id: number;
     title: string;
     start: string;
     end: string;

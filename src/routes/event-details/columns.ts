@@ -1,8 +1,10 @@
 import type { ColumnDef } from "@tanstack/table-core";
 import { statusMap, formatDate, formatTime, type Event } from "$lib/tableUtils";
+import { renderComponent } from "$lib/components/ui/data-table/index.js"
+import DeleteEvent from "./event-form/delete-event.svelte";
 
-export const columns: ColumnDef<Event>[] = [
-    {
+export function createColumns(onSuccess: () => void): ColumnDef<Event>[] {
+    return [{
         accessorKey: "title",
         header: "Title",
     },
@@ -48,6 +50,8 @@ export const columns: ColumnDef<Event>[] = [
         cell: ({ row }) => statusMap[row.original.is_approved]
     },
     {
-        id: "actions"
+        id: "actions",
+        cell: ({ row }) => renderComponent(DeleteEvent, { id: row.original.id, onSuccess })
     }
-]
+    ]
+}

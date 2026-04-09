@@ -1,6 +1,6 @@
 <script lang="ts">
     import DataTable from "$lib/components/data-table.svelte";
-    import { columns } from "./columns";
+    import { createColumns} from "./columns";
     import { type Event } from "$lib/tableUtils";
     import { onMount } from "svelte";
     import { invoke } from "@tauri-apps/api/core";
@@ -16,7 +16,7 @@
         status: [] as number[],
     });
 
-    onMount(async () => {
+    async function fetchEvents() {
         invoke<Event[]>("get_events")
             .then((result) => {
                 data = result;
@@ -24,6 +24,10 @@
             .catch((e) => {
                 console.error(e);
             });
+    }
+
+    onMount(async () => {
+        fetchEvents();
     });
 
     let ongoingData = $derived(
@@ -51,6 +55,8 @@
                     filters.status.includes(event.is_approved)),
         ),
     );
+
+    const columns = $derived(createColumns(fetchEvents));
 </script>
 
 <h2 class="mt-5 mb-4 ml-10 text-4xl font-semibold">Event Details</h2>
@@ -67,5 +73,5 @@
     <CreateEvent />
 </div>
 <div class="flex flex-col gap-10 p-4 xl:flex-row xl:p-10">
-    <DataTable data={filteredResults} {columns} showPagination={true} />
+    <DataTable data={filteredResults} columns={columns} showPagination={true} />
 </div>

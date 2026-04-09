@@ -5,17 +5,20 @@
 
     const { id, onSuccess } = $props<{ id: number, onSuccess: () => void }>();
 
+    let isOpen = $state(false);
+
     async function onDelete() { 
         try {
             await invoke("delete_event", { id });
             onSuccess();
+            isOpen = false;
         } catch(e) {
             console.error(e)
-        }
+        };
     }
 </script>
 
-<AlertDialog.Root>
+<AlertDialog.Root bind:open={isOpen}>
     <AlertDialog.Trigger class={buttonVariants({ variant: "destructive" })}>
         Delete
     </AlertDialog.Trigger>
