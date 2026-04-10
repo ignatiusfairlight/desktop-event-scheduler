@@ -51,7 +51,7 @@
                     });
                     onSuccess();
                     isOpen = false;
-                    toast.info("Event created!", {
+                    toast.success("Event created!", {
                         description: 
                         `Title: ${formResult.data.title}, Start: ${formResult.data.startDate}, ${formResult.data.startTime}`
                     });
