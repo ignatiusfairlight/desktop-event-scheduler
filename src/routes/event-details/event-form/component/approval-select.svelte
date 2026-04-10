@@ -1,16 +1,20 @@
 <script lang="ts">
     import * as Select from "$lib/components/ui/select/index.js";
 
-    const statuses = [
+    let { approvalStatus = $bindable(), allowReject = false } = $props<{
+        approvalStatus: string;
+        allowReject?: boolean;
+    }>();
+
+    const statuses = $derived([
         { value: "0", label: "Pending" },
         { value: "1", label: "Approved" },
-        { value: "2", label: "Rejected" },
-    ];
-
-    let { approvalStatus = $bindable() } = $props();
+        ...(allowReject ? [{ value: "2", label: "Rejected" }] : []),
+    ]);
 
     const triggerContent = $derived(
-        statuses.find((f) => f.value === approvalStatus)?.label ?? statuses[0].label,
+        statuses.find((f) => f.value === approvalStatus)?.label ??
+            statuses[0].label,
     );
 </script>
 
