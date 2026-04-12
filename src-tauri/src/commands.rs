@@ -27,6 +27,18 @@ pub struct CreateEvent {
     is_approved: i64,
 }
 
+#[derive(Deserialize)]
+pub struct EditEvent {
+    id: i64,
+    title: String,
+    start: String,
+    end: String,
+    location: String,
+    person_in_charge: String,
+    contact_num: String,
+    is_approved: i64,
+}
+
 #[tauri::command]
 pub async fn get_events(pool: State<'_, SqlitePool>) -> Result<Vec<Event>, String> {
     sqlx::query_as::<_, Event>("SELECT * FROM events")
@@ -61,7 +73,7 @@ pub async fn create_event(pool: State<'_, SqlitePool>, event: CreateEvent) -> Re
 }
 
 #[tauri::command]
-pub async fn update_event(pool: State<'_, SqlitePool>, event: Event) -> Result<(), String> {
+pub async fn update_event(pool: State<'_, SqlitePool>, event: EditEvent) -> Result<(), String> {
     sqlx::query(
         "UPDATE events 
          SET 
