@@ -11,7 +11,7 @@
 
 <Sidebar.Provider>
   <AppSidebar />
-  <main class="flex-1 w-full overflow-auto">
+  <main class="flex-1 w-full overflow-auto h-full">
     <Sidebar.Trigger />
     {@render children?.()}
   </main>
