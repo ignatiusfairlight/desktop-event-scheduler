@@ -3,11 +3,10 @@
 		Calendar,
 		DayGrid,
 		TimeGrid,
-		Interaction,
 	} from "@event-calendar/core";
 	let { data }: { data: any } = $props();
 
-	let plugins = [DayGrid, TimeGrid, Interaction];
+	let plugins = [DayGrid, TimeGrid];
 	let options = $state({
 		height: "75dvh",
 		headerToolbar: {
