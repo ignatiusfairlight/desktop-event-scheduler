@@ -61,17 +61,16 @@
 
 <h2 class="mt-5 mb-4 ml-10 text-4xl font-semibold">Event Details</h2>
 
-<div>
-    <EventFilter
-        bind:filterTitle={filters.title}
-        bind:filterStartMonth={filters.startMonth}
-        bind:filterEndMonth={filters.endMonth}
-        bind:filterStatus={filters.status}
-    />
-</div>
-<div>
-    <CreateEvent onSuccess={fetchEvents} />
-</div>
-<div class="flex flex-col gap-10 p-4 xl:flex-row xl:p-10">
+<div class="flex flex-col gap-4 p-4 xl:p-10">
+    <div class="flex justify-between gap-2">
+        <EventFilter
+            bind:filterTitle={filters.title}
+            bind:filterStartMonth={filters.startMonth}
+            bind:filterEndMonth={filters.endMonth}
+            bind:filterStatus={filters.status}
+        />
+
+        <CreateEvent onSuccess={fetchEvents} />
+    </div>
     <DataTable data={filteredResults} {columns} showPagination={true} />
 </div>

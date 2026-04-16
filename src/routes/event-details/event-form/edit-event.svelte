@@ -78,7 +78,7 @@
 </script>
 
 <Dialog.Root bind:open={isOpen}>
-  <Dialog.Trigger>Edit</Dialog.Trigger>
+  <Dialog.Trigger class={buttonVariants({ variant: "outline" })}>Edit</Dialog.Trigger>
   <Dialog.Content>
     <form use:enhance>
       <Form.Field {form} name="title">
