@@ -41,18 +41,20 @@
 </script>
 
 <Popover.Root>
-    <Popover.Trigger class={buttonVariants({ variant: "default" })}>Filter</Popover.Trigger>
-    <Popover.Content>
-        <div>
+    <Popover.Trigger class={buttonVariants({ variant: "default" })}
+        >Filter</Popover.Trigger
+    >
+    <Popover.Content class="flex flex-col gap-4">
+        <div class="grid grid-cols-[auto_1fr] items-center gap-x-4 gap-y-3">
+            <Label>Title</Label>
             <Input
                 bind:value={filterTitle}
                 placeholder="Enter event title"
                 class="max-w-xs"
             />
-        </div>
-        <div>
+            <Label>Start</Label>
             <Select.Root type="single" bind:value={filterStartMonth}>
-                <Select.Trigger class="w-[180px]"
+                <Select.Trigger class="w-full"
                     >{startSelectTrigger}</Select.Trigger
                 >
                 <Select.Content>
@@ -63,8 +65,9 @@
                     {/each}
                 </Select.Content>
             </Select.Root>
+            <Label>End</Label>
             <Select.Root type="single" bind:value={filterEndMonth}>
-                <Select.Trigger class="w-[180px]"
+                <Select.Trigger class="w-full"
                     >{startEndTrigger}</Select.Trigger
                 >
                 <Select.Content>
@@ -76,34 +79,19 @@
                 </Select.Content>
             </Select.Root>
         </div>
-        <div>
-            <div>
+        <Label>Status</Label>
+        {#each [{ value: 0, label: "Pending" }, { value: 1, label: "Approved" }, { value: 2, label: "Rejected" }] as status}
+            <div class="flex gap-2">
                 <Checkbox
                     onclick={() =>
-                        (filterStatus = filterStatus.includes(0)
-                            ? filterStatus.filter((item: number) => item !== 0)
-                            : [...filterStatus, 0])}
+                        (filterStatus = filterStatus.includes(status.value)
+                            ? filterStatus.filter(
+                                  (item: number) => item !== status.value,
+                              )
+                            : [...filterStatus, status.value])}
                 />
-                <Label>Pending</Label>
+                <Label>{status.label}</Label>
             </div>
-            <div>
-                <Checkbox
-                    onclick={() =>
-                        (filterStatus = filterStatus.includes(1)
-                            ? filterStatus.filter((item: number) => item !== 1)
-                            : [...filterStatus, 1])}
-                />
-                <Label>Approved</Label>
-            </div>
-            <div>
-                <Checkbox
-                    onclick={() =>
-                        (filterStatus = filterStatus.includes(2)
-                            ? filterStatus.filter((item: number) => item !== 2)
-                            : [...filterStatus, 2])}
-                />
-                <Label>Rejected</Label>
-            </div>
-        </div>
+        {/each}
     </Popover.Content>
 </Popover.Root>
