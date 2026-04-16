@@ -58,7 +58,7 @@
 </script>
 
 <Dialog.Root bind:open={isOpen}>
-  <Dialog.Trigger>Create New Event</Dialog.Trigger>
+  <Dialog.Trigger class={buttonVariants({ variant: "default" })}>Create New Event</Dialog.Trigger>
   <Dialog.Content>
     <form use:enhance>
       <Form.Field {form} name="title">
