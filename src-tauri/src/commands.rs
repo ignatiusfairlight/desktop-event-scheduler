@@ -48,6 +48,15 @@ pub async fn get_events(pool: State<'_, SqlitePool>) -> Result<Vec<Event>, Strin
 }
 
 #[tauri::command]
+pub async fn get_event_by_id(pool: State<'_, SqlitePool>, id: i64) -> Result<Event, String> {
+    sqlx::query_as::<_, Event>("SELECT * FROM events WHERE id = ?")
+        .bind(id)
+        .fetch_one(&*pool)
+        .await
+        .map_err(|e| e.to_string())
+}
+
+#[tauri::command]
 pub async fn create_event(pool: State<'_, SqlitePool>, event: CreateEvent) -> Result<(), String> {
     sqlx::query(
         "INSERT INTO events (

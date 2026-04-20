@@ -4,6 +4,7 @@ use tauri::Manager;
 mod commands;
 
 use commands::get_events;
+use commands::get_event_by_id;
 use commands::create_event;
 use commands::update_event;
 use commands::delete_event;
@@ -26,7 +27,7 @@ pub fn run() {
             Ok(())
         })
         .invoke_handler(tauri::generate_handler![
-            get_events, create_event, update_event, delete_event
+            get_events, get_event_by_id, create_event, update_event, delete_event
             ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
