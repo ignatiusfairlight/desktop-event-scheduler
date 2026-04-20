@@ -3,6 +3,7 @@
   import * as Form from "$lib/components/ui/form/index.js";
   import { setError, superForm } from "sveltekit-superforms";
   import { zod4 } from "sveltekit-superforms/adapters";
+  import { type Event } from "$lib/tableUtils";
   import { formSchema } from "./schema";
   import { invoke } from "@tauri-apps/api/core";
   import { toast } from "svelte-sonner";
@@ -75,10 +76,33 @@
   );
 
   const { form: formData, enhance } = form;
+
+  async function openDialog() {
+    const updatedEvent = await invoke<Event>("get_event_by_id", {id: event.id});
+    const [updatedStartDate, updatedStartTime] = updatedEvent.start.split(" ");
+    const [updatedEndDate, updatedEndTime] = updatedEvent.end.split(" ");
+
+    form.reset({
+      data: {
+        title: updatedEvent.title,
+        startDate: updatedStartDate,
+        startTime: updatedStartTime,
+        endDate: updatedEndDate,
+        endTime: updatedEndTime,
+        location: updatedEvent.location,
+        personInCharge: updatedEvent.person_in_charge,
+        contactNum: updatedEvent.contact_num,
+        isApproved: updatedEvent.is_approved,
+      }
+    });
+
+    approvalStatus = String(updatedEvent.is_approved);
+    isOpen = true;
+  }
 </script>
 
 <Dialog.Root bind:open={isOpen}>
-  <Dialog.Trigger class={buttonVariants({ variant: "outline" })}>Edit</Dialog.Trigger>
+  <Dialog.Trigger onclick={openDialog} class={buttonVariants({ variant: "outline" })}>Edit</Dialog.Trigger>
   <Dialog.Content>
     <form use:enhance>
       <Form.Field {form} name="title">
