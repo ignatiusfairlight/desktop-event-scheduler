@@ -27,7 +27,7 @@ jobs:
         uses: dtolnay/rust-toolchain@stable
 
       - name: Install frontend dependencies
-        run: pnpm Install
+        run: pnpm.cmd install
 
       - name: Build
         run: pnpm tauri build
