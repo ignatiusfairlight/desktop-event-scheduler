@@ -64,10 +64,12 @@
 <div class="flex flex-col gap-4 p-4 xl:p-10">
     <div class="flex justify-between gap-2">
         <EventFilter
-            bind:filterTitle={filters.title}
-            bind:filterStartMonth={filters.startMonth}
-            bind:filterEndMonth={filters.endMonth}
-            bind:filterStatus={filters.status}
+            onFilter={(f) => {
+                filters.title = f.filterTitle;
+                filters.startMonth = f.filterStartMonth;
+                filters.endMonth = f.filterEndMonth;
+                filters.status = f.filterStatus;
+            }}
         />
 
         <CreateEvent onSuccess={fetchEvents} />

@@ -2,16 +2,25 @@
     import { Input } from "$lib/components/ui/input/index.js";
     import { Checkbox } from "$lib/components/ui/checkbox/index.js";
     import { Label } from "$lib/components/ui/label/index.js";
-    import { buttonVariants } from "$lib/components/ui/button/index.js";
+    import { Button, buttonVariants } from "$lib/components/ui/button/index.js";
     import * as Select from "$lib/components/ui/select/index.js";
     import * as Popover from "$lib/components/ui/popover/index.js";
 
-    let {
-        filterTitle = $bindable(),
-        filterStartMonth = $bindable(),
-        filterEndMonth = $bindable(),
-        filterStatus = $bindable(),
-    } = $props();
+    let { onFilter } = $props<{
+        onFilter: (filters: {
+            filterTitle: string;
+            filterStartMonth: string;
+            filterEndMonth: string;
+            filterStatus: number[];
+        }) => void;
+    }>();
+
+    let filterTitle = $state("");
+    let filterStartMonth = $state("");
+    let filterEndMonth = $state("");
+    let filterStatus = $state<number[]>([]);
+
+    let isOpen = $state(false);
 
     const months = [
         { value: "", label: "Select a month" },
@@ -40,7 +49,7 @@
     );
 </script>
 
-<Popover.Root>
+<Popover.Root bind:open={isOpen}>
     <Popover.Trigger class={buttonVariants({ variant: "default" })}
         >Filter</Popover.Trigger
     >
@@ -67,8 +76,7 @@
             </Select.Root>
             <Label>End</Label>
             <Select.Root type="single" bind:value={filterEndMonth}>
-                <Select.Trigger class="w-full"
-                    >{startEndTrigger}</Select.Trigger
+                <Select.Trigger class="w-full">{startEndTrigger}</Select.Trigger
                 >
                 <Select.Content>
                     {#each months as month}
@@ -93,5 +101,16 @@
                 <Label>{status.label}</Label>
             </div>
         {/each}
+        <Button
+            onclick={() => {
+                onFilter({
+                    filterTitle,
+                    filterStartMonth,
+                    filterEndMonth,
+                    filterStatus,
+                });
+                isOpen = false;
+            }}>Submit</Button
+        >
     </Popover.Content>
 </Popover.Root>
