@@ -1,13 +1,9 @@
 <script lang="ts">
-	import {
-		Calendar,
-		DayGrid,
-		TimeGrid,
-	} from "@event-calendar/core";
+	import { Calendar, DayGrid, TimeGrid } from "@event-calendar/core";
 	let { data }: { data: any } = $props();
 
 	let plugins = [DayGrid, TimeGrid];
-	let options = $state({
+	let options = $derived({
 		height: "600px",
 		headerToolbar: {
 			start: "today",
@@ -23,6 +19,11 @@
 			},
 		],
 	});
+	let ec: any = $state();
+	$effect(() => {
+		data.events; // track changes
+		ec?.refetchEvents();
+	});
 </script>
 
-<Calendar {plugins} {options} />
+<Calendar bind:this={ec} {plugins} {options} />

@@ -40,15 +40,17 @@
       .sort((a, b) => new Date(a.start).getTime() - new Date(b.start).getTime())
       .slice(0, 5),
   );
+
+  $effect(() => {
+    console.log(approvedData);
+  });
 </script>
 
 <h2 class="mt-5 mb-4 ml-10 text-4xl font-semibold">Dashboard</h2>
 
 <div class="grid grid-cols-[2fr_1fr] grid-rows-2 gap-10 p-10">
   <div class="row-span-2">
-    {#if data.length > 0}
-      <Calendar data={{ events: approvedData }} />
-    {/if}
+    <Calendar data={{ events: approvedData }} />
   </div>
   <div class="mt-15">
     <h3 class="text-2xl font-semibold p-1 text-center">Upcoming Events</h3>
