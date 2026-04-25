@@ -69,9 +69,9 @@
                 filters.startMonth = f.filterStartMonth;
                 filters.endMonth = f.filterEndMonth;
                 filters.status = f.filterStatus;
+                console.log(f);
             }}
         />
-
         <CreateEvent onSuccess={fetchEvents} />
     </div>
     <DataTable data={filteredResults} {columns} showPagination={true} />

@@ -18,7 +18,7 @@
     let filterTitle = $state("");
     let filterStartMonth = $state("");
     let filterEndMonth = $state("");
-    let filterStatus = $state<number[]>([]);
+    let filterStatus = $state<number[]>([0,1,2]);
 
     let isOpen = $state(false);
 
@@ -91,7 +91,8 @@
         {#each [{ value: 0, label: "Pending" }, { value: 1, label: "Approved" }, { value: 2, label: "Rejected" }] as status}
             <div class="flex gap-2">
                 <Checkbox
-                    onclick={() =>
+                    checked={filterStatus.includes(status.value)}
+                    onCheckedChange={() =>
                         (filterStatus = filterStatus.includes(status.value)
                             ? filterStatus.filter(
                                   (item: number) => item !== status.value,
@@ -103,11 +104,12 @@
         {/each}
         <Button
             onclick={() => {
+                console.log("submit clicked");
                 onFilter({
                     filterTitle,
                     filterStartMonth,
                     filterEndMonth,
-                    filterStatus,
+                    filterStatus: [...filterStatus],
                 });
                 isOpen = false;
             }}>Submit</Button
