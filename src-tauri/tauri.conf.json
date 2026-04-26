@@ -12,7 +12,7 @@
   "app": {
     "windows": [
       {
-        "title": "church-event-scheduler",
+        "title": "Generic Event Scheduler",
         "width": 800,
         "height": 600
       }
