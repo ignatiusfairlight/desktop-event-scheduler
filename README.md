@@ -1,7 +1,17 @@
-# Tauri + SvelteKit + TypeScript
+# Generic Event Scheduler
 
-This template should help get you started developing with Tauri, SvelteKit and TypeScript in Vite.
+<p align="center"><em>"A glorified spreadsheet for managing events."</em></p>
 
-## Recommended IDE Setup
+## Project Overview
 
-[VS Code](https://code.visualstudio.com/) + [Svelte](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode) + [Tauri](https://marketplace.visualstudio.com/items?itemName=tauri-apps.tauri-vscode) + [rust-analyzer](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer).
+
+
+## Functionalities
+
+## Prerequisites
+
+## How It Works
+
+## Technical Overview
+
+## Lessons Learned
