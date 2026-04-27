@@ -23,13 +23,13 @@ in the public as case study for my own reference in the future.
 ## Prerequisites
 
 ### For Users
-Windows - Download the .exe file and run the installer. The .exe file can be found in `Releases`.
+Windows — Download the .exe file and run the installer. The .exe file can be found in `Releases`.
 
 ### For local development
 What you need:
-    - Node.js
-    - pnpm
-    - Rust toolchain (via rustup)
+- Node.js
+- pnpm
+- Rust toolchain (via rustup)
 
 Then:
 ```bash
