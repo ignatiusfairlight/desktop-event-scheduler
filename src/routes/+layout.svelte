@@ -3,7 +3,12 @@
   import AppSidebar from "$lib/components/app-sidebar.svelte";
   import * as Sidebar from "$lib/components/ui/sidebar/index.js";
   import { Toaster } from "$lib/components/ui/sonner/index.js";
+  import { onMount } from "svelte";
 
+  onMount(() => {
+    document.addEventListener('contextmenu', (e) => e.preventDefault());
+  });
+  
   let { children } = $props();
 </script>
 

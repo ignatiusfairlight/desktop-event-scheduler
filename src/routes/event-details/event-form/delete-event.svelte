@@ -2,6 +2,7 @@
     import * as AlertDialog from "$lib/components/ui/alert-dialog/index.js";
     import { buttonVariants } from "$lib/components/ui/button/index.js";
     import { invoke } from "@tauri-apps/api/core";
+    import { Trash2 } from "@lucide/svelte";
 
     const { id, onSuccess } = $props<{ id: number, onSuccess: () => void }>();
 
@@ -20,7 +21,7 @@
 
 <AlertDialog.Root bind:open={isOpen}>
     <AlertDialog.Trigger class={buttonVariants({ variant: "destructive" })}>
-        Delete
+        <Trash2 />
     </AlertDialog.Trigger>
     <AlertDialog.Content>
         <AlertDialog.Header>

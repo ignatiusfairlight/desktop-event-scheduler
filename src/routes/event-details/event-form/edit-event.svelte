@@ -9,6 +9,7 @@
   import { toast } from "svelte-sonner";
   import { Input } from "$lib/components/ui/input/index.js";
   import { Button, buttonVariants } from "$lib/components/ui/button/index.js";
+  import { PencilLine } from "@lucide/svelte";
   import DatePicker from "./component/date-picker.svelte";
   import TimePicker from "./component/time-picker.svelte";
   import ApprovalSelect from "./component/approval-select.svelte";
@@ -78,7 +79,9 @@
   const { form: formData, enhance } = form;
 
   async function openDialog() {
-    const updatedEvent = await invoke<Event>("get_event_by_id", {id: event.id});
+    const updatedEvent = await invoke<Event>("get_event_by_id", {
+      id: event.id,
+    });
     const [updatedStartDate, updatedStartTime] = updatedEvent.start.split(" ");
     const [updatedEndDate, updatedEndTime] = updatedEvent.end.split(" ");
 
@@ -93,7 +96,7 @@
         personInCharge: updatedEvent.person_in_charge,
         contactNum: updatedEvent.contact_num,
         isApproved: updatedEvent.is_approved,
-      }
+      },
     });
 
     approvalStatus = String(updatedEvent.is_approved);
@@ -102,7 +105,10 @@
 </script>
 
 <Dialog.Root bind:open={isOpen}>
-  <Dialog.Trigger onclick={openDialog} class={buttonVariants({ variant: "outline" })}>Edit</Dialog.Trigger>
+  <Dialog.Trigger
+    onclick={openDialog}
+    class={buttonVariants({ variant: "outline" })}><PencilLine /></Dialog.Trigger
+  >
   <Dialog.Content>
     <form use:enhance>
       <Form.Field {form} name="title">

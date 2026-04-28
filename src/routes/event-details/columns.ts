@@ -53,7 +53,7 @@ export function createColumns(onSuccess: () => void): ColumnDef<ChurchEvent>[] {
     {
       id: "actions",
       cell: ({ row }) =>
-        renderComponent(TableActions, { event: row.original as ChurchEvent, onSuccess }),
+        renderComponent(TableActions, { event: row.original, onSuccess }),
     },
   ];
 }
