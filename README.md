@@ -23,6 +23,7 @@ in the public as case study for my own reference in the future.
 - View events on a calendar
 - Filter events by title, date range, and approval status
 - (Coming Soon) Approve or reject events
+- (Coming Soon) Option to color code events
 - Archive past approved events
 - (Coming Soon) Render event form (export as PNG)
 
