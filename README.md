@@ -18,7 +18,12 @@ this app further to customize their needs specifically, so in the meantime I'm l
 in the public as case study for my own reference in the future. 
 
 ## Functionalities
-
+- Create, edit, delete events
+- View events on a calendar
+- Filter events by title, date range, and approval status
+- (Coming Soon) Approve or reject events
+- Archive past approved events
+- (Coming Soon) Render event form (export as PNG)
 
 ## Prerequisites
 
@@ -38,9 +43,25 @@ pnpm tauri dev
 ```
 
 ## How It Works
-
+- Open the app → lands on Dashboard
+- Dashboard shows the calendar, upcoming approved events, and events pending approval
+- Sidebar navigates between Dashboard, Event Details, and Archives
+- Event Details is where most operations happen — create, edit, delete, approve/reject events [please expand this further]
+- Archives stores past approved events for reference
 
 ## Technical Overview
+- SvelteKit runs in SPA mode via adapter-static, producing static HTML/CSS/JS files that Tauri loads directly — no web server required
+- SvelteKit handles the UI, filtering, and pagination on the frontend
+- Frontend communicates with the Rust backend via Tauri's invoke commands
+- Rust handles all database operations directly against SQLite
+- No server or remote hosting — all data is stored locally on the user's machine
 
 
 ## Lessons Learned
+- Discovered Tauri as a method of turning web apps into desktop apps
+- Figured out a serverless solution for a management software by using SQLite
+- Learning Svelte 5 runes and reactivity patterns
+- SPA mode with Superforms and handling form validation without a server
+- Tanstack Table patterns like the createColumns closure
+- Tauri's invoke/command pattern for frontend-backend communication
+- GitHub Actions for CI/CD and automated builds
