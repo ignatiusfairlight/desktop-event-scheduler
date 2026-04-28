@@ -28,7 +28,7 @@ in the public as case study for my own reference in the future.
 
 ## Prerequisites
 
-### For Users
+### For users
 Windows — Download the .exe file and run the installer. The .exe file can be found in `Releases`.
 
 ### For local development
@@ -44,6 +44,7 @@ pnpm tauri dev
 ```
 
 ## How It Works
+<!-- Add pictures here later -->
 - Open the app → lands on Dashboard
 - Dashboard shows the calendar, upcoming approved events, and events pending approval
 - Sidebar navigates between Dashboard, Event Details, and Archives
