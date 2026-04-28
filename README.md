@@ -69,7 +69,9 @@ pnpm tauri dev
 - GitHub Actions for CI/CD and automated builds
 
 ## Potential Improvement(s)
-- Conflict detection
+- Conflict detection (when events happening on the same location has overlapping time)
 - Moving all the business logic (filtering, pagination, etc) to the Tauri side
-- Using a different UI library
-- Add additional page/section for more configuration options (creating presets, auto color coding by location)
+- Using a different (better) UI library
+- Add additional page/section for a dedicated configuration options (creating presets, auto color coding by location)
+- Backup data via cloud storage
+- Auto updater
