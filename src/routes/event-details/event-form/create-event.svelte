@@ -150,7 +150,7 @@
         >
           Cancel
         </Dialog.Close>
-        <Button type="submit" class={buttonVariants({ variant: "secondary" })}
+        <Button type="submit" class={buttonVariants({ variant: "default" })}
           >Save changes</Button
         >
       </Dialog.Footer>
