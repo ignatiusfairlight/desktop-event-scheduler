@@ -1,11 +1,12 @@
 # Generic Event Scheduler
 
+<h3 align="center"><em>"A glorified spreadsheet for managing events."</em></h3>
+
 <p align="center">
   <img src="https://img.shields.io/badge/Tauri-24C8D8?style=for-the-badge&logo=tauri&logoColor=white" />
   <img src="https://img.shields.io/badge/SvelteKit-FF3E00?style=for-the-badge&logo=svelte&logoColor=white" />
   <img src="https://img.shields.io/badge/SQLite-003B57?style=for-the-badge&logo=sqlite&logoColor=white" />
 </p>
-<p align="center"><em>"A glorified spreadsheet for managing events."</em></p>
 
 ## Project Overview
 
@@ -13,7 +14,7 @@ As the tagline suggests, what this app is capable of can all be done in a spread
 that you don't have to go through the hoops of "Data validation" or "Conditional Formatting" or even worse;
 "Visual Basic Commands". This app was intended to help a local diocese in managing their events, which is a
 small part of a bigger effort to digitize their records and day-to-day operations. What was once considered a
-complicated project (by me) ultimately leading to a simplified solution to the problem; a local event scheduler, no servers, no remote hosting, all data saved locally. Of course for the diocese, I intend to improve
+complicated project (by me) ended up as a simplified solution to the problem; a local event scheduler, no servers, no remote hosting, all data saved locally. Of course for the diocese, I intend to improve
 this app further to customize their needs specifically, so in the meantime I'm letting this barebones version
 in the public as case study for my own reference in the future. 
 
@@ -56,7 +57,6 @@ pnpm tauri dev
 - Rust handles all database operations directly against SQLite
 - No server or remote hosting — all data is stored locally on the user's machine
 
-
 ## Lessons Learned
 - Discovered Tauri as a method of turning web apps into desktop apps
 - Figured out a serverless solution for a management software by using SQLite
@@ -65,3 +65,9 @@ pnpm tauri dev
 - Tanstack Table patterns like the createColumns closure
 - Tauri's invoke/command pattern for frontend-backend communication
 - GitHub Actions for CI/CD and automated builds
+
+## Potential Improvement(s)
+- Conflict detection
+- Moving all the business logic (filtering, pagination, etc) to the Tauri side
+- Using a different UI library
+- Add additional page/section for more configuration options (creating presets, auto color coding by location)
