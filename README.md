@@ -49,15 +49,24 @@ pnpm tauri dev
 - Open the app → lands on Dashboard
 - Dashboard shows the calendar, upcoming approved events, and events pending approval
 - Sidebar navigates between Dashboard, Event Details, and Archives
-- Event Details is where most operations happen — create, edit, delete, approve/reject events [please expand this further]
+- Event Details is where most operations happen — create, edit, delete, approve/reject events <!-- please expand this further -->
 - Archives stores past approved events for reference
 
 ## Technical Overview
-- SvelteKit runs in SPA mode via adapter-static, producing static HTML/CSS/JS files that Tauri loads directly — no web server required
-- SvelteKit handles the UI, filtering, and pagination on the frontend
-- Frontend communicates with the Rust backend via Tauri's invoke commands
-- Rust handles all database operations directly against SQLite
-- No server or remote hosting — all data is stored locally on the user's machine
+By running SvelteKit in SPA mode via adapter-static, I can produce static HTML/CSS/JS files that Tauri loads directly — no web server required, making this a serverless desktop application.
+
+This version of the application have SvelteKit handles the UI, filtering, and pagination on the frontend. In my opinion, these
+should have been written in the backend instead to make the application more robust. However, since this is more of a proof of
+concept + exploratory project in Tauri + my first attempt at making a desktop application, I will leave it like this for now.
+
+SvelteKit then communicate with Tauri backend written in Rust via Tauri's invoke command which you can see if you go through the event CRUD functions. And all that is left is for Rust to interact with SQLite for most of the CRUD operations. The best part of using SQLite is that user does not need a remote server to host their database because of how light SQLite is in nature.
+The only downside for it right now is if something happens to the database, then there are no backups for it (for now).
+
+### Why Svelte/SvelteKit?
+Svelte is my first Javascript frontend framework, and I intend to make it my only framework ever since. No offense to React or Vue, but Svelte runes make frontend development less dull than it already is right now. Is it as mature as the other two? No, and I am fine with it. For me at least, I find code written in Svelte is more readable than other frontend frameworks out there. Call it a skill issue or whatever, I'll take it and happy to live with it till the day I can no longer code.
+
+### Why Tauri-Rust?
+I don't like Electron.Plus Tauri has way smaller bundle size and Tauri apps in general does not hog RAM usage like Electron apps do (which means a lot in these days where RAM prices are way expensive than they should be).
 
 ## Lessons Learned
 - Discovered Tauri as a method of turning web apps into desktop apps
