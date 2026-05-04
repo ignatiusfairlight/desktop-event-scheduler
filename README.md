@@ -66,7 +66,7 @@ The only downside for it right now is if something happens to the database, then
 Svelte is my first Javascript frontend framework, and I intend to make it my only framework ever since. No offense to React or Vue, but Svelte runes make frontend development less dull than it already is right now. Is it as mature as the other two? No, and I am fine with it. For me at least, I find code written in Svelte is more readable than other frontend frameworks out there. Call it a skill issue or whatever, I'll take it and happy to live with it till the day I can no longer code.
 
 ### Why Tauri-Rust?
-I don't like Electron.Plus Tauri has way smaller bundle size and Tauri apps in general does not hog RAM usage like Electron apps do (which means a lot in these days where RAM prices are way expensive than they should be).
+I don't like Electron. Plus Tauri has way smaller bundle size and Tauri apps in general does not hog RAM usage like Electron apps do (which means a lot in these days where RAM prices are way expensive than they should be).
 
 ## Lessons Learned
 - Discovered Tauri as a method of turning web apps into desktop apps
