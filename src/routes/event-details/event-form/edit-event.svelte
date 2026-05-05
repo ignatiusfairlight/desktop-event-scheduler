@@ -189,7 +189,7 @@
         <Form.Control>
           {#snippet children({ props })}
             <Form.Label>Approval Status</Form.Label>
-            <ApprovalSelect {...props} bind:approvalStatus />
+            <ApprovalSelect {...props} bind:approvalStatus allowReject={true}/>
           {/snippet}
         </Form.Control>
       </Form.Field>
@@ -200,7 +200,7 @@
         >
           Cancel
         </Dialog.Close>
-        <Button type="submit" class={buttonVariants({ variant: "secondary" })}
+        <Button type="submit" class={buttonVariants({ variant: "default" })}
           >Save changes</Button
         >
       </Dialog.Footer>
