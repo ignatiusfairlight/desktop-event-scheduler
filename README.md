@@ -84,3 +84,5 @@ I don't like Electron. Plus Tauri has way smaller bundle size and Tauri apps in 
 - Add additional page/section for a dedicated configuration options (creating presets, auto color coding by location)
 - Backup data via cloud storage
 - Auto updater
+
+<!-- ## Post Mortem -->
